@@ -15,10 +15,10 @@ import {
 
 
 export default class FirebaseApi {
-  app :FirebaseApp
-  analytics: Analytics
-  auth: Auth
-  googleAuthProvider: GoogleAuthProvider
+  app :FirebaseApp;
+  analytics: Analytics;
+  auth: Auth;
+  googleAuthProvider: GoogleAuthProvider;
 
   constructor() {
     this.app = initializeApp(firebaseConfig)
@@ -26,4 +26,16 @@ export default class FirebaseApi {
     this.auth = getAuth(this.app)
     this.googleAuthProvider = new GoogleAuthProvider()
   }
+  onAuthStateChanged = (nextOrObserver : NextOrObserver<User>): Unsubscribe => {
+    return onAuthStateChanged(this.auth, nextOrObserver)
+  }
+
+  signInWithGoogleRedirect = () => {
+    return signInWithRedirect(this.auth, this.googleAuthProvider)
+  }
+
+  signOut = () => {
+    return signOut(this.auth)
+  }
 }
+
