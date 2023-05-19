@@ -6,12 +6,12 @@ import { Subtract } from 'utility-types';
 
 const FirebaseContext  =  createContext<FirebaseApi | null>(null);
 
-export interface withFirebaseApiProps {
+export interface WithFirebaseApiProps {
   firebaseApi : FirebaseApi
 }
 
-export const withFirebaseApi = <P extends withFirebaseApiProps> ( Component : React.ComponentType<P>) => {
-  return (props : Subtract<P, withFirebaseApiProps>) => {
+export const withFirebaseApi = <P extends WithFirebaseApiProps> ( Component : React.ComponentType<P>) => {
+  return (props : Subtract<P, WithFirebaseApiProps>) => {
     <FirebaseContext.Consumer>
         {firebaseApi => <Component {...props as P} firebaseApi={firebaseApi!} />}
     </FirebaseContext.Consumer>
